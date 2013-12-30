@@ -1,0 +1,24 @@
+{
+  "name": "foo",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "BSD-2-Clause",
+  "dependencies": {
+    "coffee-script": "~1.6.3",
+    "mashape-oauth": "~0.1.6",
+    "request": "~2.30.0",
+    "underscore": "~1.5.2",
+    "caterpillar-filter": "~2.0.3",
+    "caterpillar-human": "~2.1.1",
+    "caterpillar": "~2.0.7",
+    "q": "~0.9.7"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2"
+  }
+}
