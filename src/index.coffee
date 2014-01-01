@@ -23,4 +23,4 @@ AutoMerger = require './auto_merger'
 
 new AutoMerger(config).perform()
 
-#app.listen(parseInt(process.env.PORT || 8080));
+app.listen(parseInt(process.env.PORT || 28080))

@@ -5,16 +5,17 @@ module.exports = (grunt) ->
 
   coffee_script_dynamic_files =
     expand: true,
-    src: ['src/**/*.coffee']
+    cwd: 'src'
+    src: ['**/*.coffee']
     dest: 'lib/'
     ext: '.js'
 
   grunt.initConfig({
-    coffee:
-      compile:
-        options:
-          sourceMap: true
-        files: [ coffee_script_dynamic_files ]
+    # coffee:
+    #   compile:
+    #     options:
+    #       sourceMap: true
+    #     files: [ coffee_script_dynamic_files ]
     coffeelint:
       app:
         files: [ coffee_script_dynamic_files ]
@@ -38,6 +39,7 @@ module.exports = (grunt) ->
         src: ['test/*.coffee']
   })
 
-  grunt.registerTask 'default', ['coffeelint', 'vows', 'coffee']
+  #grunt.registerTask 'default', ['coffeelint', 'vows', 'coffee']
+  grunt.registerTask 'default', ['test']
   grunt.registerTask 'test', ['coffeelint', 'vows']
-  grunt.registerTask 'prepublish', ['coffee']
+  #grunt.registerTask 'prepublish', ['coffee']
