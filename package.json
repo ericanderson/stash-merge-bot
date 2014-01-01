@@ -18,7 +18,8 @@
     "caterpillar": "~2.0.7",
     "q": "~0.9.7",
     "forever": "~0.10.11",
-    "express": "~3.4.7"
+    "express": "~3.4.7",
+    "astash": "~0.1.0"
   },
   "devDependencies": {
     "grunt": "~0.4.2",
