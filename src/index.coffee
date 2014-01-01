@@ -4,7 +4,6 @@ sys = require('sys')
 util = require('util')
 fs = require('fs')
 https = require 'https'
-Stash = require 'astash'
 config = require '../conf/config'
 
 app = module.exports = express()

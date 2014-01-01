@@ -15,7 +15,9 @@ class AutoMergerEntry
 
     pr.canMerge().then((result) =>
       if result.canMerge and @_pullRequestPassesRequirements(pr)
-        pr.attemptMerge().done()
+        pr.attemptMerge().done(=>
+          @logger.log('notice', "Merged #{pr.shortName()}")
+        )
       else
         @logger.log('info', "#{pr.shortName()} does not meet requirements for merge.")
     )
