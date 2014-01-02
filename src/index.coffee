@@ -23,7 +23,21 @@ AutoMerger = require './auto_merger'
 doWork = ->
   new AutoMerger(config).perform()
 
-config.logger.log('info', "Scheduling work every #{config.interval}ms.")
-setInterval(doWork, config.interval)
+pjson = require('../package.json');
+program = require 'commander'
 
-app.listen(parseInt(process.env.PORT || 28080))
+program
+  .version(pjson.version)
+  .option('-n, --dry-run', 'perform read-only actions')
+  .option('-o, --run-once', 'don\' loop, just run once')
+  .parse(process.argv)
+
+if program.dryRun
+  config.dryRun = true
+
+if program.once
+  doWork()
+else
+  config.logger.log('info', "Scheduling work every #{config.interval}ms.")
+  setInterval(doWork, config.interval)
+  app.listen(parseInt(process.env.PORT || 28080))
