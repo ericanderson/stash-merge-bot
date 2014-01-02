@@ -20,7 +20,10 @@ app.get('/', (request, response) ->
 
 AutoMerger = require './auto_merger'
 
+doWork = ->
+  new AutoMerger(config).perform()
 
-new AutoMerger(config).perform()
+config.logger.log('info', "Scheduling work every #{config.interval}ms.")
+setInterval(doWork, config.interval)
 
 app.listen(parseInt(process.env.PORT || 28080))

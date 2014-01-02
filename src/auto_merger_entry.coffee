@@ -7,7 +7,7 @@ class AutoMergerEntry
     @stash.eachPullRequest(@config.project, @config.repo, (pr) =>
       @_performPullRequest(pr)
     ).done( =>
-      @logger.log('debug', "Finished iterating through pages for #{@config.project}/#{@config.repo}")
+      @logger.log('info', "Finished iterating through pages for #{@config.project}/#{@config.repo}")
     )
 
   _performPullRequest: (pr) ->
