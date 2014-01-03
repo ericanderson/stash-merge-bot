@@ -1,3 +1,6 @@
+ ✔ Add delete branch support @done (14-01-03 16:00)
+ ☐ Configure branch deletion per repo
+ ☐ Alert HipChat of Merge
  ☐ Add retry support for this error:
     /Users/eanderson/src/stash-bot/node_modules/q/q.js:126
                         throw e;

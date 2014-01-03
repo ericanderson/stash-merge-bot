@@ -46,16 +46,17 @@ program
   .version(pjson.version)
   .option('-n, --dry-run', 'perform read-only actions')
   .option('-o, --run-once', 'don\' loop, just run once')
+  .option('-i, --interval <i>', 'interval to check at in seconds', parseInt)
   .parse(process.argv)
 
-if program.dryRun
-  config.dryRun = true
+config.dryRun = true if program.dryRun
+config.interval = program.interval if program.interval
 
 config.logger.log('warn', 'DRY RUN IS ON') if config.dryRun
 
 if program.runOnce?
   doWork()
 else
-  config.logger.log('info', "Scheduling work every #{config.interval}ms.")
-  setInterval(doWork, config.interval)
+  config.logger.log('info', "Scheduling work every #{config.interval}s.")
+  setInterval(doWork, config.interval*1000)
   server.listen(parseInt(process.env.PORT || 28080))

@@ -19,7 +19,14 @@ class AutoMergerEntry
           @logger.log('notice', "DRY-RUN: Merged #{pr.shortName()}")
         else
           pr.attemptMerge().done(=>
-           @logger.log('notice', "Merged #{pr.shortName()}")
+            @logger.log('notice', "Merged #{pr.shortName()}")
+            # TODO: Check if we should merge at a project level rather than blindly doing it
+            @stash.deleteBranch(pr.project, pr.repositorySlug, pr.fromRef.id, pr.fromRef.latestChangeset)
+              .then((->
+                @logger.log('info', "Deleted #{pr.project}/#{pr.repositorySlug} #{pr.fromRef.id}@#{pr.fromRef.latestChangeset}")
+              ),((error)=>
+                @logger.log('notice', "Deleting #{pr.project}/#{pr.repositorySlug} #{pr.fromRef.id}@#{pr.fromRef.latestChangeset}", error.originalBody)
+              ))
           )
       else
         @logger.log('info', "#{pr.shortName()} does not meet requirements for merge.")
