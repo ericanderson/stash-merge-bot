@@ -1,0 +1,14 @@
+ ☐ Add retry support for this error:
+    /Users/eanderson/src/stash-bot/node_modules/q/q.js:126
+                        throw e;
+                              ^
+    Error: 502: Unable to connect to Stash
+        at Request._callback (/Users/eanderson/src/stash-bot/node_modules/astash/lib/astash.js:156:34)
+        at Request.self.callback (/Users/eanderson/src/stash-bot/node_modules/request/request.js:123:22)
+        at Request.EventEmitter.emit (events.js:98:17)
+        at Request.<anonymous> (/Users/eanderson/src/stash-bot/node_modules/request/request.js:893:14)
+        at Request.EventEmitter.emit (events.js:117:20)
+        at IncomingMessage.<anonymous> (/Users/eanderson/src/stash-bot/node_modules/request/request.js:844:12)
+        at IncomingMessage.EventEmitter.emit (events.js:117:20)
+        at _stream_readable.js:920:16
+        at process._tickCallback (node.js:415:13)

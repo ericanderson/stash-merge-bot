@@ -20,7 +20,8 @@
     "forever": "~0.10.11",
     "express": "~3.4.7",
     "astash": "~0.1.2",
-    "commander": "~2.1.0"
+    "commander": "~2.1.0",
+    "socket.io": "~0.9.16"
   },
   "devDependencies": {
     "grunt": "~0.4.2",

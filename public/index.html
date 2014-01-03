@@ -1,0 +1,79 @@
+<!doctype html>
+<!--[if lt IE 8]> <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if IE 9]>    <html class="no-js ie9 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/modernizr/2.7.1/modernizr.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.6.3/coffee-script.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.4.0/moment.min.js"></script>
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.2.1/handlebars.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.marionette/1.4.0-bundled/backbone.marionette.min.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+
+  <script id="resultTable" type="text/x-handlebars-template">
+    <table>
+    <tbody>
+    </tbody>
+    </table>
+  </script>
+
+  <script id="resultRow" type="text/x-handlebars-template">
+    <td>{{levelName}}:&nbsp;</td>
+    <td>{{prettyDate date}}</td>
+    <td>&nbsp;-&nbsp;{{args}}</td>
+  </script>
+
+  <script type="text/coffeescript">
+    Handlebars.registerHelper 'prettyDate', (date) ->
+      moment(date).format('MMMM Do YYYY, h:mm:ss a')
+
+    $ ->
+      class ResultRow extends Backbone.Marionette.ItemView
+        tagName: 'tr'
+        className: -> @model.get('levelName')
+        template: Handlebars.compile($('#resultRow').html())
+
+      class ResultView extends Backbone.Marionette.CompositeView
+        template: Handlebars.compile($('#resultTable').html())
+        itemViewContainer: 'tbody'
+        itemView: ResultRow
+        el: 'body'
+
+      collection = new Backbone.Collection()
+      new ResultView({collection: collection}).render()
+
+
+      socket = io.connect()
+      socket.on 'log', (data) ->
+        data.prettyDate
+        collection.push(data)
+        collection.shift() while collection.length > 35
+
+  </script>
+  <style>
+    td {
+      font: 12px/14px Monaco, "Courier New", Courier;
+    }
+    tr.error td {
+      color: rgb(169, 68, 66);
+    }
+    tr.warn td {
+      color: rgb(138, 109, 59);
+    }
+    tr.info td {
+      color: rgb(49, 112, 143);
+    }
+    tr.debug td {
+      color: rgb(153, 153, 153)
+    }
+  </style>
+</head>
+<body>
+merp
+</body>
+</html>
