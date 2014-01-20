@@ -25,7 +25,7 @@ class AutoMergerEntry
               .then((->
                 @logger.log('info', "Deleted #{pr.project}/#{pr.repositorySlug} #{pr.fromRef.id}@#{pr.fromRef.latestChangeset}")
               ),((error)=>
-                @logger.log('notice', "Deleting #{pr.project}/#{pr.repositorySlug} #{pr.fromRef.id}@#{pr.fromRef.latestChangeset}", error.originalBody)
+                @logger.log('notice', "Failed to delete #{pr.project}/#{pr.repositorySlug} #{pr.fromRef.id}@#{pr.fromRef.latestChangeset}", error.originalBody)
               ))
           )
       else
