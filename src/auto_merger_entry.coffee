@@ -22,7 +22,7 @@ class AutoMergerEntry
             @logger.log('notice', "Merged #{pr.shortName()}")
             # TODO: Check if we should merge at a project level rather than blindly doing it
             @stash.deleteBranch(pr.project, pr.repositorySlug, pr.fromRef.id, pr.fromRef.latestChangeset)
-              .then((->
+              .then((=>
                 @logger.log('info', "Deleted #{pr.project}/#{pr.repositorySlug} #{pr.fromRef.id}@#{pr.fromRef.latestChangeset}")
               ),((error)=>
                 @logger.log('notice', "Failed to delete #{pr.project}/#{pr.repositorySlug} #{pr.fromRef.id}@#{pr.fromRef.latestChangeset}", error.originalBody)
